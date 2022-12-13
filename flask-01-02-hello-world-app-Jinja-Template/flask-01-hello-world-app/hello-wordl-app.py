@@ -13,7 +13,7 @@ def second():
 def third():
     return "This is the subpage of third page"
 
-@app.route('/fouth/<string:id>')
+@app.route('/forth/<string:id>')
 def fourth(id):
     return f"The id of this page is {id}"
 
