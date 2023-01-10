@@ -1,4 +1,3 @@
----
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
   CloudFormation template to deploy the Kittens Carousel web application
@@ -21,3 +20,27 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+  WebServer: 
+        Type: 
+        Properties: 
+           ImageId: ami-0b5eea76982371e91
+           InstanceType: t2.micro
+           KeyName: mynewKey
+           SecurityGroupIds:
+                 - ! Ref WebServerSecurityGroup
+           Tags:
+               - Key: Name
+                 Value: WebServer-Lola 
+           UserData: 
+              Fn::Base64:
+              |  
+                #!/bin/bash
+                yum update -y 
+                yum install httpd -y 
+                cd /var/wwww/html
+                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/index.html
+                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat0.jpg
+                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat1.jpg
+                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat2.jpg
+                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat3.png
+                
