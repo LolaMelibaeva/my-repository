@@ -21,13 +21,13 @@ Resources:
           ToPort: 80
           CidrIp: 0.0.0.0/0
   WebServer: 
-        Type: 
-        Properties: 
+    Type: AWS::EC2::Instance
+    Properties: 
            ImageId: ami-0b5eea76982371e91
            InstanceType: t2.micro
            KeyName: mynewKey
            SecurityGroupIds:
-                 - ! Ref WebServerSecurityGroup
+                 - !Ref WebServerSecurityGroup
            Tags:
                - Key: Name
                  Value: WebServer-Lola 
@@ -38,10 +38,11 @@ Resources:
                 yum update -y 
                 yum install httpd -y 
                 cd /var/wwww/html
-                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/index.html
-                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat0.jpg
-                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat1.jpg
-                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat2.jpg
-                wget https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/cat3.png
+                FOLDER="https://raw.githubusercontent.com/LolaMelibaeva/my-repository/main/Project-101-kittens-carousel-static-website-ec2/static-web/"
+                wget ${FOLDER}index.html
+                wget ${FOLDER}cat0.jpg
+                wget ${FOLDER}cat1.jpg
+                wget ${FOLDER}cat2.jpg
+                wget ${FOLDER}cat3.png
                 systemctl start httpd
                 systemctl enable httpd
